@@ -146,16 +146,16 @@ if image_file is not None:
             predicted_class = np.argmax(predictions, axis=-1)
             confidence = np.max(predictions)
 
-        confidence_threshold = 0.60  # Increased confidence threshold to 60%
-        if confidence >= confidence_threshold:
-            if len(predicted_class) > 0:
-                result = f"Prediction: {class_names[predicted_class[0]]} with {confidence*100:.2f}% confidence"
-            else:
-                result = "Prediction: Unable to classify, please try again."
-        else:
-            result = f"Prediction: Not a leaf type (Confidence: {confidence*100:.2f}%)"
+          # Threshold and result display
+        if predictions is not None:
+            confidence_threshold = 0.60  # Increased confidence threshold to 60%
 
-        st.success(result)
+            if confidence < confidence_threshold:
+                result = f"Prediction: Not a recognized flower (Confidence: {confidence*100:.2f}%)"
+            else:
+                result = f"Prediction: {class_names[predicted_class[0]]} with {confidence*100:.2f}% confidence"
+
+            st.success(result)
 
         os.remove(img_path)
 
