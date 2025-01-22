@@ -121,7 +121,7 @@ st.header("Upload Gambar Disini dan Dapatkan Prediksinya!")
 
 # Image loading function
 def load_image(filename):
-    img = load_img(filename, target_size=(32, 32))
+    img = load_img(filename, target_size=(32, 32))  # Ensure this matches your model's input size
     img = img_to_array(img)
     img = img.reshape(1, 32, 32, 3)
     img = img.astype('float32')
@@ -153,11 +153,17 @@ if image_file is not None:
                 predictions = model.predict(img_to_predict)
                 predicted_class = np.argmax(predictions, axis=-1)
                 confidence = np.max(predictions)
+
+                # Debugging: Log predictions
+                st.write("Raw Predictions:", predictions)
+                st.write("Predicted Class Index:", predicted_class)
+                st.write("Confidence Level:", confidence)
+
             except Exception as e:
                 st.error(f"Error during prediction: {e}")
                 predictions = None
 
-       # Threshold and result display
+        # Threshold and result display
         if predictions is not None:
             confidence_threshold = 0.60  # Adjusted confidence threshold to 60%
 
