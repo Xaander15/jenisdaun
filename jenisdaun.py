@@ -84,7 +84,7 @@ if not os.path.exists('./images'):
     os.makedirs('./images')
 
 # Upload image section with fancy file uploader
-image_file = st.file_uploader("🍂 Upload an image", type=["jpg", "png"], key="file_uploader")
+image_file = st.file_uploader("🌄 Upload an image", type=["jpg", "png"], key="file_uploader")
 
 if image_file is not None:
     if st.button("Classify Image 🧠", key="classify_button"):
@@ -108,7 +108,7 @@ if image_file is not None:
                 st.error(f"Error during prediction: {e}")
                 predictions = None
 
-       # Threshold and result display
+        # Threshold and result display
         if predictions is not None:
             confidence_threshold = 0.60  # Increased confidence threshold to 60%
 
@@ -121,6 +121,9 @@ if image_file is not None:
 
         os.remove(img_path)
 
+# Add unique progress bar for better interactivity
+if st.button("Reload App"):    
+    st.progress(100)
 # Additional information about leaves
 st.markdown("""
 ### **Jenis Daun**:
