@@ -87,7 +87,7 @@ class_names = ['blimbing', 'jeruk', 'kemangi']
 @st.cache_resource
 def load_my_model():
     try:
-        model = tf.keras.models.load_model("kemangi_blimbing_model_class.h5")  # Replace with your model path
+        model = tf.keras.models.load_model("keras_model.h5")  # Replace with your model path
         return model
     except Exception as e:
         st.error(f"Error loading model: {e}")
