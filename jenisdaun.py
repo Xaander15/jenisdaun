@@ -96,7 +96,7 @@ model = load_my_model()
 # Main title with cool text effect
 st.markdown("""
     <h1 style="text-align:center; color: #007bff; font-family: 'Courier New', Courier, monospace; animation: glow 2s ease-in-out infinite alternate;">
-    🌿 Leaf Classification App by Kelompok 3
+    🌿 Leaf Classification App by Kelompok 4
     </h1>
     <style>
     @keyframes glow {
