@@ -37,7 +37,7 @@ def load_class_names(file_path):
         class_names = [line.strip() for line in f.readlines()]
     return class_names
 
-class_names = load_class_names("label.txt")
+class_names = load_class_names("labels.txt")
 
 # Load model
 @st.cache_resource
