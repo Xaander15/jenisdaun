@@ -157,14 +157,17 @@ if image_file is not None:
                 st.error(f"Error during prediction: {e}")
                 predictions = None
 
-        # Threshold and result display
+       # Threshold and result display
         if predictions is not None:
             confidence_threshold = 0.60  # Adjusted confidence threshold to 60%
 
             if confidence < confidence_threshold:
                 result = f"Prediction: Not a recognized leaf (Confidence: {confidence*100:.2f}%)"
             else:
-                result = f"Prediction: {class_names[predicted_class[0]]} with {confidence*100:.2f}% confidence"
+                if 0 <= predicted_class[0] < len(class_names):
+                    result = f"Prediction: {class_names[predicted_class[0]]} with {confidence*100:.2f}% confidence"
+                else:
+                    result = "Prediction index is out of range"
 
             st.success(result)
 
