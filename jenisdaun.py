@@ -41,15 +41,11 @@ with st.sidebar:
 def load_and_modify_model():
     try:
         # Load model directly
-        model = tf.keras.models.load_model("keras_model.h5", compile=False)
+        model = tf.keras.models.load_model("keras_Model.h5", compile=False)
     except Exception as e:
         st.error(f"Error loading model directly: {e}")
         try:
-            # Load model from JSON if H5 fails
-            with open("keras_Model.json", "r") as json_file:
-                model_config = json_file.read()
-            model = model_from_json(model_config)
-            
+        
             # Modify problematic layers
             for layer in model.layers:
                 if isinstance(layer, tf.keras.layers.DepthwiseConv2D):
