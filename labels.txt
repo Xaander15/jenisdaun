@@ -1,3 +1,3 @@
-0 blimbing
-1 jeruk
-2 kemangi
+blimbing
+jeruk
+kemangi
