@@ -17,7 +17,7 @@ with st.sidebar:
 @st.cache_resource
 def load_model():
     try:
-        model = tf.keras.models.load_model("keras_Model.h5", compile=False)  # Ensure model path is correct
+        model = tf.keras.models.load_model("keras_model.h5", compile=False)  # Ensure model path is correct
         return model
     except Exception as e:
         st.error(f"Error loading model: {e}")
