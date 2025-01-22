@@ -88,7 +88,7 @@ class_names = [
 # Load model
 @st.cache_resource
 def load_my_model():
-    model = tf.keras.models.load_model("Leaf_Classifier/final_model1.h5")
+    model = tf.keras.models.load_model("final_model1.h5")
     return model
 
 model = load_my_model()
