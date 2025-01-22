@@ -43,7 +43,7 @@ class_names = load_class_names("labels.txt")
 @st.cache_resource
 def load_my_model():
     try:
-        model = tf.keras.models.load_model("keras.md")
+        model = tf.keras.models.load_model("keras_Model.h5")
         return model
     except Exception as e:
         st.error(f"Error loading model: {e}")
