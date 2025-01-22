@@ -10,7 +10,7 @@ import time
 import streamlit_lottie as st_lottie
 
 # Streamlit page configuration
-st.set_page_config(page_title="Flower Image Classification", page_icon="🌸", layout="wide")
+st.set_page_config(page_title="Leaf Image Classification", page_icon="🌿", layout="wide")
 
 # Load Lottie animation
 def load_lottie_url(url: str):
@@ -27,8 +27,8 @@ lottie_animation = load_lottie_url(lottie_url)
 with st.sidebar:
     st_lottie.st_lottie(lottie_animation, height=200, width=200, key="lottie_animation")
     st.markdown("<h2 style='color: #007bff;'>Explore the App!</h2>", unsafe_allow_html=True)
-    st.markdown("**About the Model:** This model classifies flowers into 5 categories: daisy, dandelion, roses, sunflowers, and tulips.")
-    
+    st.markdown("**About the Model:** This model classifies leaves into 3 categories: blimbing, jeruk, and kemangi.")
+
     # Features section with hover effect
     st.markdown(""" 
         <style>
@@ -80,14 +80,14 @@ with st.sidebar:
     st.markdown("<hr>", unsafe_allow_html=True)
     st.markdown('Contact us at: [**Kelompok 4**](https://www.linkedin.com/in/het-patel-8b110525a/?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app)')
 
-# Flower class names
-class_names = ['daisy', 'dandelion', 'roses', 'sunflowers', 'tulips']
+# Leaf class names
+class_names = ['blimbing', 'jeruk', 'kemangi']
 
 # Load model
 @st.cache_resource
 def load_my_model():
     try:
-        model = tf.keras.models.load_model("final_model1.h5")  # Replace with your model path
+        model = tf.keras.models.load_model("final_model_leaf.h5")  # Replace with your model path
         return model
     except Exception as e:
         st.error(f"Error loading model: {e}")
@@ -98,7 +98,7 @@ model = load_my_model()
 # Main title with cool text effect
 st.markdown("""
     <h1 style="text-align:center; color: #007bff; font-family: 'Courier New', Courier, monospace; animation: glow 2s ease-in-out infinite alternate;">
-    🌸 Flower Image Classification
+    🌿 Leaf Image Classification
     </h1>
     <style>
     @keyframes glow {
@@ -112,7 +112,7 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-st.header("Upload Gambar Disini dan Dapatkan Prediksinya!")
+st.header("Upload Gambar Daun Disini dan Dapatkan Prediksinya!")
 
 # Image loading function
 def load_image(filename):
@@ -128,7 +128,7 @@ if not os.path.exists('./images'):
     os.makedirs('./images')
 
 # Upload image section with fancy file uploader
-image_file = st.file_uploader("🌄 Upload an image", type=["jpg", "png"], key="file_uploader")
+image_file = st.file_uploader("🌞 Upload an image", type=["jpg", "png"], key="file_uploader")
 
 if image_file is not None:
     if st.button("Classify Image 🧠", key="classify_button"):
@@ -157,7 +157,7 @@ if image_file is not None:
             confidence_threshold = 0.60  # Increased confidence threshold to 60%
 
             if confidence < confidence_threshold:
-                result = f"Prediction: Not a recognized flower (Confidence: {confidence*100:.2f}%)"
+                result = f"Prediction: Not a recognized leaf (Confidence: {confidence*100:.2f}%)"
             else:
                 result = f"Prediction: {class_names[predicted_class[0]]} with {confidence*100:.2f}% confidence"
 
@@ -169,26 +169,24 @@ if image_file is not None:
 if st.button("Reload App"):
     st.progress(100)
 
-# Additional flower information
+# Additional leaf information
 st.markdown("""
-### **Jenis Bunga**:
-- **Daisy**: Bunga umum dengan cakram tengah dan kelopak putih.
-- **Dandelion**: Bunga kuning yang berubah menjadi bola bulu ketika matang.
-- **Mawar**: Bunga populer yang dikenal dengan warna-warnanya yang cerah dan harum.
-- **Bunga Matahari**: Bunga besar berwarna kuning yang dikenal dengan ukurannya dan heliotropisme.
-- **Tulip**: Bunga berwarna-warni dengan bentuk yang halus dan bulat.
+### **Jenis Daun**:
+- **Blimbing**: Daun dengan bentuk khas menyerupai bintang.
+- **Jeruk**: Daun hijau yang sering digunakan sebagai rempah aromatik.
+- **Kemangi**: Daun kecil beraroma khas, sering digunakan dalam masakan tradisional.
 """, unsafe_allow_html=True)
 
-# Data for flower classification performance
+# Data for leaf classification performance
 data = {
-    "Class": ['Daisy', 'Dandelion', 'Roses', 'Sunflowers', 'Tulips'],
-    "Accuracy": [0.92, 0.88, 0.89, 0.93, 0.85],  # Example values, replace with real metrics
-    "Precision": [0.90, 0.85, 0.87, 0.92, 0.84]  # Example values, replace with real metrics
+    "Class": ['Blimbing', 'Jeruk', 'Kemangi'],
+    "Accuracy": [0.92, 0.88, 0.89],  # Example values, replace with real metrics
+    "Precision": [0.90, 0.85, 0.87]  # Example values, replace with real metrics
 }
 
 df = pd.DataFrame(data)
 
 # Stylish DataFrame with 5 rows
-st.markdown("### Flower Classification Performance")
+st.markdown("### Leaf Classification Performance")
 styled_table = df.style.background_gradient(cmap="coolwarm", subset=['Accuracy', 'Precision'])
 st.dataframe(styled_table, height=400)
