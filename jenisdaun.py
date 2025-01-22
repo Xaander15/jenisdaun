@@ -92,7 +92,7 @@ else:
 @st.cache_resource
 def load_my_model():
     try:
-        model = tf.keras.models.load_model("final_model1.h5")  # Update with the correct model path
+        model = tf.keras.models.load_model("kemangi_blimbing_model_class.h5")  # Update with the correct model path
         return model
     except Exception as e:
         st.error(f"Error loading model: {e}")
